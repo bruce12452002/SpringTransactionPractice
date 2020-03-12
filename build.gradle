@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'bruce'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springVersion = '5.2.4.RELEASE'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+    compile group: 'org.springframework', name: 'spring-jdbc', version: springVersion
+    testCompile group: 'org.springframework', name: 'spring-test', version: springVersion
+    compile group: 'org.springframework', name: 'spring-aspects', version: springVersion
+    compile group: 'c3p0', name: 'c3p0', version: '0.9.1.2'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+}
