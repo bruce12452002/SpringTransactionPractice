@@ -23,7 +23,7 @@ public class TransactionAOP {
         tx.rollback(status);
     }
 
-    /* 如果加了 try...catch 也是要處理，但一般都不用 try...catch 了
+    /* 如果加了 try...catch 也是要處理，但一般都不用 try...catch
     public void doSomething(ProceedingJoinPoint pjp) {
         TransactionStatus status = tx.begin();
         try {

@@ -70,6 +70,7 @@ public class TestTransaction {
      * 自己寫 transaction
      */
     @Test
+    @Ignore
     public void testTxAdviceSelf() {
         service.updateName1(1001);
     }
@@ -81,5 +82,13 @@ public class TestTransaction {
     @Test
     public void testTxAdvice() {
         System.out.println("成功筆數=" + service.updateName1(1001));
+    }
+
+    /**
+     * 測試 annotation 註解
+     */
+    @Test
+    public void testAnnotation() {
+        service.updateName3(1001);
     }
 }

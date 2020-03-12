@@ -2,12 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/aop
-        https://www.springframework.org/schema/aop/spring-aop.xsd
+
+
         http://www.springframework.org/schema/tx
         https://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/context
@@ -15,6 +14,9 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="haha"/>
+
+    <!-- 事務的 annotation 註解，有需要就可以打開，然後方法上或類別上使用 @Transactional 即可-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
@@ -31,6 +33,8 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+
+    <!--
     <aop:config>
         <aop:pointcut id="t" expression="execution(public void haha.ccc.Tuv.*(..))"/>
         <aop:aspect ref="upDown">
@@ -47,6 +51,7 @@
             <aop:after-throwing method="catchException" pointcut-ref="sm"/>
         </aop:aspect>
     </aop:config>
+    -->
 
     <!--    <aop:config>-->
     <!--        <aop:pointcut id="s" expression="execution(public * haha.service.*.*(..))"/>-->
@@ -54,10 +59,14 @@
     <!--    </aop:config>-->
 
     <!-- 屬性 transaction-manager="transactionManager" 是預設的，可不寫 -->
+    <!--
     <tx:advice id="tx-advice" transaction-manager="transactionManager">
         <tx:attributes>
-            <!-- propagation="REQUIRED" 是預設的，可不寫 -->
-            <tx:method name="*" propagation="REQUIRED"/> <!-- 匹配所有方法-->
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="load*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED" read-only="false"/>
         </tx:attributes>
     </tx:advice>
+    -->
 </beans>

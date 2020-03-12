@@ -6,6 +6,7 @@ import haha.util.TransactionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,5 +34,11 @@ public class UserServiceImpl implements UserService {
             transactionUtils.rollback(status);
         }
         return 0;
+    }
+
+    @Override
+    @Transactional("transactionManager")
+    public int updateName3(int id) {
+        return dao.getName(id);
     }
 }
