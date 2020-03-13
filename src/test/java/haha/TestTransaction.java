@@ -1,5 +1,6 @@
 package haha;
 
+import haha.ccc.Animal;
 import haha.ccc.Tuv;
 import haha.service.NoInterface;
 import haha.service.UserService;
@@ -60,7 +61,7 @@ public class TestTransaction {
      * 測試 AOP
      * [Xlint:invalidAbsoluteTypeName] 為切點的表達式錯誤(最可能是方法沒寫)
      */
-    @Ignore
+//    @Ignore
     @Test
     public void testSimpleAOP() {
         tuv.aaa();
@@ -96,6 +97,7 @@ public class TestTransaction {
     /**
      * 測試沒有介面的事務，沒問題的
      */
+    @Ignore
     @Test
     public void testNoInterface() {
         noInterface.updateName(1001);

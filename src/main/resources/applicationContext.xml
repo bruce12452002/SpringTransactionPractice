@@ -3,10 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
-
-
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/tx
         https://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/context
@@ -16,7 +17,7 @@
     <context:component-scan base-package="haha"/>
 
     <!-- 事務的 annotation 註解，有需要就可以打開，然後方法上或類別上使用 @Transactional 即可-->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- <tx:annotation-driven transaction-manager="transactionManager"/>-->
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
@@ -33,25 +34,28 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <aop:config>
+        <aop:pointcut id="t" expression="execution(public * haha.ccc.Tuv.*(..))"/>
+        <aop:aspect ref="upDown">
+            <aop:before method="up" pointcut-ref="t" />
+            <aop:after method="down" pointcut-ref="t"/>
+            <aop:around method="two" pointcut-ref="t" />
+            <aop:after-throwing method="throwing" pointcut-ref="t"/>
+
+            <!-- xxx 為 returning 方法的參數名稱 -->
+            <aop:after-returning method="returning" pointcut-ref="t" returning="xxx"/>
+        </aop:aspect>
+    </aop:config>
 
     <!--
-    <aop:config>
-        <aop:pointcut id="t" expression="execution(public void haha.ccc.Tuv.*(..))"/>
-        <aop:aspect ref="upDown">
-            <aop:before method="up" pointcut-ref="t"/>
-            <aop:after method="down" pointcut-ref="t"/>
-            <aop:around method="two" pointcut-ref="t"/>
-        </aop:aspect>
-    </aop:config>
-
-    <aop:config>
-        <aop:pointcut id="sm" expression="execution(public * haha.service.*.*(..))"/>
-        <aop:aspect ref="transactionAOP">
-            <aop:around method="doSomething" pointcut-ref="sm"/>
-            <aop:after-throwing method="catchException" pointcut-ref="sm"/>
-        </aop:aspect>
-    </aop:config>
-    -->
+        <aop:config>
+            <aop:pointcut id="sm" expression="execution(public * haha.service.*.*(..))"/>
+            <aop:aspect ref="transactionAOP">
+                <aop:around method="doSomething" pointcut-ref="sm"/>
+                <aop:after-throwing method="catchException" pointcut-ref="sm"/>
+            </aop:aspect>
+        </aop:config>
+        -->
 
     <!--    <aop:config>-->
     <!--        <aop:pointcut id="s" expression="execution(public * haha.service.*.*(..))"/>-->

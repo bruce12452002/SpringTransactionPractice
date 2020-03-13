@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Tuv {
-    public void aaa(){
-        System.out.println("aaa");
+    public String aaa() {
+        return "aaaaaaaaaaaaaaaaaaa";
     }
 }
