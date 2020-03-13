@@ -1,6 +1,5 @@
 package haha;
 
-import haha.ccc.Animal;
 import haha.ccc.Tuv;
 import haha.service.NoInterface;
 import haha.service.UserService;
