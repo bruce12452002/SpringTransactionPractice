@@ -18,14 +18,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer updateName1(int id) {
-        return dao.getName(id);
+        return dao.updateName(id);
     }
 
     @Override
     public int updateName2(int id) {
         TransactionStatus status = transactionUtils.begin();
         try {
-            int count = dao.getName(id);
+            int count = dao.updateName(id);
             transactionUtils.commit(status);
             return count;
         } catch (Exception e) {
@@ -39,6 +39,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional("transactionManager")
     public int updateName3(int id) {
-        return dao.getName(id);
+        return dao.updateName(id);
     }
 }

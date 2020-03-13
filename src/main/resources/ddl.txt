@@ -1,0 +1,21 @@
+CREATE TABLE `table1` (
+  `pk` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `timestamp` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`pk`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+INSERT INTO `table1` (`pk`,`id`,`name`,`timestamp`) VALUES (1,1001,'ooo','2020-02-19 15:54:28');
+INSERT INTO `table1` (`pk`,`id`,`name`,`timestamp`) VALUES (2,1002,'george','2020-02-19 15:54:58');
+
+
+
+CREATE TABLE `table2` (
+  `id` int(11) NOT NULL,
+  `money` int(11) DEFAULT '0',
+  `name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+INSERT INTO `table2` (`id`,`money`,`name`) VALUES (1,888,'george');

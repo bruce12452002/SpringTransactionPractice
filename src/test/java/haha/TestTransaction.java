@@ -87,8 +87,17 @@ public class TestTransaction {
     /**
      * 測試 annotation 註解
      */
+    @Ignore
     @Test
     public void testAnnotation() {
         service.updateName3(1001);
+    }
+
+    /**
+     * 測試沒有介面的事務，沒問題的
+     */
+    @Test
+    public void testNoInterface() {
+        noInterface.updateName(1001);
     }
 }
