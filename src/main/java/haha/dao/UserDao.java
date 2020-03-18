@@ -10,8 +10,8 @@ public class UserDao {
     private JdbcTemplate template;
 
     public Integer updateName(int id) {
-        Integer succCount = template.update("update table1 set name = 'mary' where id=" + id);
-        int i = 1 / 0;
+        Integer succCount = template.update("update table1 set name = 'maryO' where id=" + id);
+//        int i = 1 / 0;
         return succCount;
     }
 }

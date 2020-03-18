@@ -1,11 +1,13 @@
 package haha.service.impl;
 
 import haha.dao.UserDao;
+import haha.service.MoneyService;
 import haha.service.UserService;
 import haha.util.TransactionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -15,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private TransactionUtils transactionUtils;
+
+    @Autowired
+    private MoneyService moneyService;
 
     @Override
     public Integer updateName1(int id) {
@@ -40,5 +45,12 @@ public class UserServiceImpl implements UserService {
     @Transactional("transactionManager")
     public int updateName3(int id) {
         return dao.updateName(id);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public int updateName4(int id, int money) {
+        dao.updateName(id);
+        return moneyService.updateMoney(money);
     }
 }

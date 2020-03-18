@@ -60,7 +60,7 @@ public class TestTransaction {
      * 測試 AOP
      * [Xlint:invalidAbsoluteTypeName] 為切點的表達式錯誤(最可能是方法沒寫)
      */
-//    @Ignore
+    @Ignore
     @Test
     public void testSimpleAOP() {
         tuv.aaa();
@@ -100,5 +100,10 @@ public class TestTransaction {
     @Test
     public void testNoInterface() {
         noInterface.updateName(1001);
+    }
+
+    @Test
+    public void testPropagation() {
+        service.updateName4(1001, 777);
     }
 }
