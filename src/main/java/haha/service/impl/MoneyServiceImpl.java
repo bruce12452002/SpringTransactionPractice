@@ -15,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>
  * MANDATORY：支持當前事務，不存在就報錯
  * <p>
- * NESTED：支持當前事務，存在事務就嵌套(有錯全部回滾，沒有錯互不影響)；不存在就創建一個新的
+ * NESTED：不存在就創建一個新的；父事務提交或回滾，子事務才會提交或回滾
+ *    但子事務可以獨立回滾，如果有 try-catch，不會造成父事務回滾；相反則會造成父事務回滾
  * <p>
  * <p>
  * <p>
